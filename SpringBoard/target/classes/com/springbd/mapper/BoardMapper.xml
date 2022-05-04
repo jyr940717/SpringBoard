@@ -8,4 +8,15 @@
 		insert into board(bno,title,content,writer) values(board_seq.nextval,#{title},#{content},#{writer})
 	</insert>
  
+ 	<select id="getList" resultType="com.springbd.domain.BoardVO">
+ 	
+ 		select * from board
+ 		
+ 	</select>
+ 	
+ 	<select id="getPage" resultType="com.springbd.domain.BoardVO">
+ 	
+ 		select * from board where bno = #{bno} 
+ 		
+ 	</select>
   </mapper>

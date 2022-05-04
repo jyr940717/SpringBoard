@@ -2,6 +2,7 @@ package com.springbd.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +21,19 @@ public class BoardController {
 	@Autowired
 	private BoardService bservice;
 	
+	@GetMapping("/get")
+	public void boardGetPageGET(int bno, Model model) {
+		
+		log.info(bno+"번 게시물");
+		
+		model.addAttribute("pageInfo", bservice.getPage(bno));
+	}
+	
 	@GetMapping("/list")
-	public void boardListGet() {
+	public void boardListGet(Model model) {
 		log.info("게시판 목록 페이지");
+		
+		model.addAttribute("list",bservice.getList());
 	}
 	
 	@GetMapping("/enroll")
