@@ -1,4 +1,4 @@
-package com.spring.persistance;
+package com.springbd.persistance;
 
 import static org.junit.Assert.fail;
 

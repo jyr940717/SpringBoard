@@ -1,4 +1,4 @@
-package com.spring.persistance;
+package com.springbd.persistance;
 
 import java.sql.Connection;
 import java.sql.SQLException;
