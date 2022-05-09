@@ -80,7 +80,7 @@ thead {
 		<c:forEach items="${list}" var="list">
 			<tr>
 				<td>
-					<a class="move" href='/board/get?bno=<c:out value="${list.bno }"/>'>
+					<a class="move" href='<c:out value="${list.bno }"/>'>
 					<c:out value="${list.bno}" />
 					</a>
 				</td>
@@ -93,13 +93,15 @@ thead {
 			</tr>
 		</c:forEach>
 	</table>
+	<form id="moveForm" method="get">
+	</form>
 	<script>
 		$(document).ready(function() {
 
-			var result = '<c:out value="${result}"/>';
+			let result = '<c:out value="${result}"/>';
 
 			checkAlert(result);
-
+			
 			function checkAlert(result) {
 
 				if (result === '') {
@@ -109,8 +111,27 @@ thead {
 				if (result === "enroll success") {
 					alert("등록이 완료되었습니다.");
 				}
+				
+				if (result === "modify success") {
+					alert("수정이 완료되었습니다.");
+				}
+				
+				if (result === "delete success") {
+					alert("삭제가 완료되었습니다.")
+				}
 			}
 		});
+		
+		let moveForm = $("#moveForm");
+		 
+	    $(".move").on("click", function(e){
+	        e.preventDefault();
+	        
+	        moveForm.empty();
+	     	moveForm.append("<input type='hidden' name='bno' value='"+ $(this).attr("href")+ "'>");
+	        moveForm.attr("action", "/board/get");
+	        moveForm.submit();
+	    });
 	</script>
 
 </body>

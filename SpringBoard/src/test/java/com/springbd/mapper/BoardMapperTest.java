@@ -7,8 +7,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.springbd.domain.BoardVO;
+import com.springbd.domain.Criteria;
 import com.springbd.mapper.BoardMapper;
 
 import jdk.internal.org.jline.utils.Log;
@@ -49,10 +51,44 @@ public class BoardMapperTest {
 //		
 //	}
 	
+//	@Test
+//	public void testGetPage() {
+//		int bno = 2;
+//		
+//		log.info(""+ mapper.getPage(bno));
+//	}
+	
+//	@Test
+//	public void testModify() {
+//		BoardVO vo = new BoardVO();
+//		
+//		vo.setBno(100);
+//		vo.setTitle("¼öÁ¤");
+//		vo.setContent("ÄíÄí");
+//		
+//		int result = mapper.modify(vo);
+//		log.info("result : "+result);
+//		System.out.println(mapper.getPage(3));
+//	}
+	
+//	@Test
+//	public void testDelete() {
+//		
+//		int result = mapper.delete(17);
+//		log.info("result : "+result);
+//	}
+	
 	@Test
-	public void testGetPage() {
-		int bno = 2;
+	public void getListPaging() {
 		
-		log.info(""+ mapper.getPage(bno));
+		
+		Criteria cri = new Criteria();
+		
+		cri.setPageNum(2);
+		
+		List list = mapper.getListPaging(cri);
+		
+		list.forEach(board -> log.info(""+board));
 	}
+	
 }

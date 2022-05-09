@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.springbd.domain.BoardVO;
+import com.springbd.domain.Criteria;
 
 import lombok.extern.log4j.Log4j;
 
@@ -38,11 +39,35 @@ public class BoardServiceTests {
 //		service.getList().forEach(board -> log.info("" + board));
 //		
 //	}
+//	
+//	@Test
+//	public void testGetPage() {
+//		
+//		int bno = 3;
+//		log.info("" + service.getPage(bno));
+//	}
+//	
+//	@Test
+//	public void testModify() {
+//		BoardVO vo = new BoardVO();
+//		
+//		vo.setBno(3);
+//		vo.setTitle("ÄíÄí·ç");
+//		vo.setContent("»æ»Í");
+//		
+//		service.modify(vo);
+//	}
+	
+//	@Test
+//	public void testDeleteService() {
+//		int result = service.delete(17);
+//		log.info("result : " + result);
+//	}
 	
 	@Test
-	public void testGetPage() {
-		
-		int bno = 3;
-		log.info("" + service.getPage(bno));
+	public void getListPaging() {
+		Criteria cri = new Criteria();
+		List list = service.getListPaging(cri);  
+		list.forEach(board -> log.info(""+board));
 	}
 }		

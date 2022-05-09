@@ -53,18 +53,18 @@ textarea{
 </head>
 <body>
 <h1>조회 페이지</h1>
-	<form method="post">
+	<form id="modifyForm" action="/board/modify" method="post">
 	<div class="input_wrap">
 		<label>게시판 번호</label>
 		<input name="bno" readonly="readonly" value='<c:out value="${pageInfo.bno}"/>' >
 	</div>
 	<div class="input_wrap">
 		<label>게시판 제목</label>
-		<input name="title" readonly="readonly" value='<c:out value="${pageInfo.title}"/>' >
+		<input name="title" value='<c:out value="${pageInfo.title}"/>' >
 	</div>
 	<div class="input_wrap">
 		<label>게시판 내용</label>
-		<textarea rows="3" name="content" readonly="readonly"><c:out value="${pageInfo.content}"/></textarea>
+		<textarea rows="3" name="content" ><c:out value="${pageInfo.content}"/></textarea>
 	</div>
 	<div class="input_wrap">
 		<label>게시판 작성자</label>
@@ -80,32 +80,35 @@ textarea{
 	</div>		
 	<div class="btn_wrap">
 		<a class="btn" id="list_btn">목록 페이지</a> 
-		<a class="btn" id="modify_btn">수정 하기</a>
-		<a class="btn" id="delete_btn">삭제 하기</a>
+		<a class="btn" id="modify_btn">수정 완료</a>
+		<a class="btn" id="cancel_btn">취소 하기</a>
 	</div>
-	 </form>
+	</form>
 	<form id="infoForm" action="/board/modify" method="get">
 		<input type="hidden" id="bno" name="bno" value='<c:out value="${pageInfo.bno}"/>'>
 	</form>
 <script>
-	let form = $("#infoForm");
+	let form = $("#infoForm");    //페이지 이동 Form
+	let mForm = $("#modifyForm"); //페이지 수정 Form
 	
+	/* 목록 페이지로 이동 */
 	$("#list_btn").on("click", function(e){
 		form.find("#bno").remove();
 		form.attr("action", "/board/list");
 		form.submit();
 	});
 	
+	/* 수정 완료 */
 	$("#modify_btn").on("click", function(e){
-		form.attr("action", "/board/modify");
-		form.submit();
+		mForm.submit();
 	});	
 	
-	$("#delete_btn").on("click", function(e){
-		form.attr("action", "/board/delete");
-		form.attr("method", "post");
+	/* 취소 */
+	$("#cancel_btn").on("click", function(e){
+		form.attr("action", "/board/get");
 		form.submit();
 	});
+	
 </script>	
 </body>
 </html>
