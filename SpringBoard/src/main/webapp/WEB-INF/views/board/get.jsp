@@ -86,8 +86,28 @@ textarea{
 	 </form>
 	<form id="infoForm" action="/board/modify" method="get">
 		<input type="hidden" id="bno" name="bno" value='<c:out value="${pageInfo.bno}"/>'>
+		<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
+		<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
 	</form>
 <script>
+	$(document).ready(function() {
+	
+		let result = '<c:out value="${result}"/>';
+	
+		checkAlert(result);
+		
+		function checkAlert(result) {
+	
+			if (result === '') {
+				return;
+			}
+	
+			if (result === "modify success") {
+				alert("수정이 완료되었습니다.");
+			}
+			
+		}
+	});
 	let form = $("#infoForm");
 	
 	$("#list_btn").on("click", function(e){

@@ -1,5 +1,7 @@
 package com.springbd.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springbd.domain.BoardVO;
 import com.springbd.domain.Criteria;
+import com.springbd.domain.PageMakerDTO;
 import com.springbd.service.BoardService;
 
 import lombok.extern.log4j.Log4j;
@@ -27,11 +30,14 @@ public class BoardController {
 	private BoardService bservice;
 	
 	@GetMapping("/get")
-	public void boardGetPageGET(int bno, Model model) {
+	public void boardGetPageGET(int bno, Model model,Criteria cri) {
 		
 		log.info(bno+"번 게시물");
 		
 		model.addAttribute("pageInfo", bservice.getPage(bno));
+		
+		model.addAttribute("cri", cri);
+		
 	}
 	
 //	@GetMapping("/list")
@@ -47,6 +53,12 @@ public class BoardController {
 		log.info("boardListGET");
 		
 		model.addAttribute("list",bservice.getListPaging(cri));
+		
+		int total = bservice.getTotal();
+		
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+		
+		model.addAttribute("pageMaker", pageMake);
 		
 	}
 	
@@ -68,19 +80,26 @@ public class BoardController {
 		
 	}
 	@GetMapping("/modify")
-	public void boardModifyGet(int bno,Model model) {
+	public void boardModifyGet(int bno,Model model,Criteria cri) {
 		
 		model.addAttribute("pageInfo",bservice.getPage(bno));
+		
+		model.addAttribute("cri", cri);
+		
 	}
 	
 	@PostMapping("/modify")
-	public String boardModifyPost(BoardVO board, RedirectAttributes rttr) {
+	public String boardModifyPost(BoardVO board, RedirectAttributes rttr,Criteria cri) {
+		
 		
 		bservice.modify(board);
 		
 		rttr.addFlashAttribute("result","modify success");
+		rttr.addAttribute("bno", board.getBno());
+		rttr.addAttribute("pageNum",cri.getPageNum());
+		rttr.addAttribute("amount",cri.getAmount());
 		
-		return "redirect:/board/list";
+		return "redirect:/board/get";
 	}
 	
 	@PostMapping("/delete")

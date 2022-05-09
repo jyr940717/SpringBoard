@@ -18,4 +18,6 @@ public interface BoardService {
 	public int delete(int bno);
 	
 	public List<BoardVO> getListPaging(Criteria cri);
+	
+	public int getTotal();
 }

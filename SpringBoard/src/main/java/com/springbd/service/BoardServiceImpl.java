@@ -45,4 +45,9 @@ public class BoardServiceImpl implements BoardService{
 		return mapper.getListPaging(cri);
 	}
 
+	@Override
+	public int getTotal() {
+		return mapper.getTotal();
+	}
+
 }
