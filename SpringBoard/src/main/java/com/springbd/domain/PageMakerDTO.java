@@ -86,6 +86,4 @@ public class PageMakerDTO {
 				+ ", total=" + total + ", cri=" + cri + "]";
 	}
 	
-	
-
 }

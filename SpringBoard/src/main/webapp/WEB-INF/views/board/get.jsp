@@ -50,6 +50,9 @@ textarea{
 	margin-top : 50px;
 }
 </style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/4.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <h1>조회 페이지</h1>
@@ -81,7 +84,27 @@ textarea{
 	<div class="btn_wrap">
 		<a class="btn" id="list_btn">목록 페이지</a> 
 		<a class="btn" id="modify_btn">수정 하기</a>
-		<a class="btn" id="delete_btn">삭제 하기</a>
+		<a class="btn" href="#exampleModal" data-toggle="modal">삭제 하기</a>
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">게시물 삭제</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        게시물을 정말 삭제하시겠습니까?
+			      </div>
+			      <div class="modal-footer">
+			      	<button type="button" id="delete_btn" class="btn btn-primary">삭제하기</button>
+			       	<button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
 	</div>
 	 </form>
 	<form id="infoForm" action="/board/modify" method="get">
